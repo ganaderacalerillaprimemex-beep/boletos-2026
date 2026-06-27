@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalTicket Pro - Sistema de Reservas Deportivas</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f4f6f9; margin: 0; padding: 10px; color: #333; }
+        .container { background: #ffffff; max-width: 450px; margin: 20px auto; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 6px solid #111111; }
+        h2 { font-size: 20px; margin: 0 0 5px 0; text-align: center; color: #111; font-weight: 700; }
+        .urgency-badge { background-color: #dc3545; color: white; padding: 6px 12px; font-size: 11px; font-weight: bold; border-radius: 20px; display: inline-block; margin-bottom: 20px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 0.7; } 50% { opacity: 1; } 100% { opacity: 0.7; } }
+        .form-group { margin-bottom: 16px; text-align: left; }
+        label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 5px; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
+        input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; background: #fafafa; transition: border 0.2s; }
+        input:focus, select:focus { border-color: #111; outline: none; }
+        .btn-submit { background-color: #111; color: white; border: none; padding: 15px; width: 100%; font-size: 15px; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 15px; letter-spacing: 0.5px; }
+        .btn-submit:disabled { background-color: #555; cursor: not-allowed; }
+        .success-icon { color: #28a745; font-size: 56px; margin-bottom: 15px; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- PANTALLA PRINCIPAL DEL FORMULARIO -->
+    <div class="container" id="form-container">
+        <h2>GlobalTicket Pro</h2>
+        <p style="font-size: 13px; text-align: center; color: #666; margin: 0 0 15px 0;">Plataforma de Asignación e Intercambio de Entradas 2026</p>
+        
+        <div style="text-align: center;">
+            <div class="urgency-badge">⚠️ DISPONIBILIDAD CRÍTICA - RESERVA INMEDIATA</div>
+        </div>
+        
+        <form onsubmit="procesarSimulacion(event)">
+            <div class="form-group">
+                <label>Selecciona el Encuentro y Localidad:</label>
+                <select required id="evento">
+                    <option value="">-- Selecciona una opción --</option>
+                    <option value="1">Colombia vs. Portugal (Miami) - Cat 1 [$17,325 MXN] -> ¡Solo 12 disponibles!</option>
+                    <option value="2">Jordania vs. Argentina (Dallas) - Cat 3 [$4,200 MXN] -> ¡Solo 47 disponibles!</option>
+                    <option value="3">Sudáfrica vs. Canadá (Los Ángeles) - Cat 4 [$875 MXN] -> ¡Solo 89 disponibles!</option>
+                    <option value="4">México vs. Rival por Confirmar (CDMX) - Cat 2 [$5,200 MXN] -> ¡Solo 6 disponibles!</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Número de Tarjeta</label>
+                <input type="text" placeholder="4242 4242 4242 4242" inputmode="numeric" maxlength="19" required>
+            </div>
+
+            <div class="form-group" style="display: flex; gap: 10px;">
+                <div style="flex: 1;">
+                    <label>Expiración</label>
+                    <input type="text" placeholder="MM/AA" maxlength="5" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>Código CVV</label>
+                    <input type="password" placeholder="•••" inputmode="numeric" maxlength="3" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-text">Confirmar Registro de Reserva</button>
+        </form>
+    </div>
+
+    <!-- PANTALLA DE ÉXITO FICTICIO -->
+    <div class="container" id="success-container" style="display: none; text-align: center;">
+        <div class="success-icon">✓</div>
+        <h2>¡Reserva Procesada con Éxito!</h2>
+        <p style="font-size: 14px; color: #444; margin-top: 15px; line-height: 1.5;">Su solicitud de asignación ha sido aprobada por el sistema de preventa secundaria.</p>
+        <p style="font-size: 13px; color: #666; background: #f8f9fa; padding: 10px; border-radius: 6px; border: 1px solid #eee;">
+            Código de Localización: <strong>GT-982XW</strong>
+        </p>
+        <p style="font-size: 12px; color: #999; margin-top: 25px;">Por favor, mantenga esta ventana abierta. Su sesión académica finalizará automáticamente al concluir el módulo.</p>
+    </div>
+
+    <script>
+        function procesarSimulacion(event) {
+            event.preventDefault();
+            
+            // Efecto visual de procesamiento bancario ficticio
+            document.getElementById('btn-text').innerText = "Procesando con la entidad bancaria...";
+            document.getElementById('btn-text').disabled = true;
+            
+            // Retraso programado de 1.5 segundos antes del cambio de pantalla
+            setTimeout(function() {
+                document.getElementById('form-container').style.display = 'none';
+                document.getElementById('success-container').style.display = 'block';
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
